@@ -1,7 +1,219 @@
-.my-grid{
-    border: 1px solid blue;
+/* Base Styles */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.my-grid-item{
-    border: 1px solid red;
+/* Header Styles */
+.recent-chats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.recent-chats-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Button Styles */
+.new-chat-btn, .add-friends-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.new-chat-btn:hover, .add-friends-btn:hover {
+    background-color: #0066cc;
+    text-decoration: none;
+}
+
+.material-icons {
+    font-size: 18px;
+}
+
+/* Chat List Styles */
+.recent-chats-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.friend-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    gap: 15px;
+}
+
+.friend-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.avatar-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.friend-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.online-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #28a745;
+    border: 2px solid white;
+}
+
+.offline-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #adb5bd;
+    border: 2px solid white;
+}
+
+.friend-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.friend-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.last-message {
+    font-size: 0.875rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-time {
+    font-size: 0.75rem;
+    color: #adb5bd;
+    white-space: nowrap;
+    margin-left: auto;
+    padding-left: 10px;
+}
+
+/* No Friends State */
+.no-friends-container {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.no-friends-icon {
+    font-size: 60px;
+    color: #adb5bd;
+    margin-bottom: 20px;
+}
+
+.no-friends-icon .material-icons {
+    font-size: inherit;
+}
+
+.no-friends-title {
+    font-size: 1.375rem;
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+.no-friends-text {
+    color: #6c757d;
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 600px) {
+    .recent-chats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .recent-chats-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .home-container {
+        padding: 15px;
+    }
+    
+    .friend-card {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .friend-avatar {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .btn-text {
+        display: none;
+    }
+    
+    .new-chat-btn, .add-friends-btn {
+        padding: 8px;
+        border-radius: 50%;
+    }
+    
+    .no-friends-container {
+        padding: 30px 15px;
+    }
+    
+    .no-friends-icon {
+        font-size: 50px;
+    }
 }

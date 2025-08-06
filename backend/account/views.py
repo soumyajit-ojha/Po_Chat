@@ -6,6 +6,7 @@ from django.conf import settings
 from friend.friend_request_status import FriendRequestStatus
 from friend.models import FriendRequest, FriendList
 from .models import Account
+from .models import get_default_profile_image as default_image_path
 
 # Import utilities
 from .utils import fetch_account_details, handle_image_upload, search_accounts
@@ -109,8 +110,8 @@ def edit_account_view(request, *args, **kwargs):
     if request.method == "POST":
         form = AccountUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            if 'profile_image' in request.FILES:
-                account.profile_image.delete()
+            if account.profile_image and account.profile_image.path != default_image_path:
+                    account.profile_image.delete()
             form.save()
             return redirect('account', user_id=account.pk)
         else:

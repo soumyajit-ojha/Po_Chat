@@ -3,12 +3,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import (
-    HomeScreenView,
+    home_screen_view,
 )
 
 
 urlpatterns = [
-    path('', HomeScreenView.as_view(), name='home'),
+    path('', home_screen_view, name='home'),
 ]
 
 if settings.DEBUG:

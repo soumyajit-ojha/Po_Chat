@@ -25,16 +25,19 @@ AUTH_USER_MODEL = "account.Account"
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',               # rule daphne should have to firstt to avoid conflic of commanding runserver command.
+    'personal',
+    'account',
+    'friend',
+    'chat',
+    'channels',
+    # default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Installed apps
-    'personal',
-    'account',
-    'friend',
 ]
 
 MIDDLEWARE = [
@@ -45,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     # session and authentication middleware
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'pochat.urls'
@@ -65,8 +71,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pochat.wsgi.application'
+# WSGI_APPLICATION = 'pochat.wsgi.application'
+# Daphne
+ASGI_APPLICATION = 'pochat.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],  # Redis server
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

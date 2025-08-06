@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="{% static 'css/chat/chat_room.css' %}">
+</head>
+
+<body>
+    <div class="chat-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <img src="{{ avatar }}" alt="Profile Image" class="profile-image">
+            <h2>{{ receiver.username | title }} {{ chat_room.pk  }}</h2>
+            <div class="online-indicator"></div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chat-messages">
+            {% for message in messages %}
+            <div class="message {% if message.sender == request.user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    {{ message.content }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="chat-form" class="chat-input">
+            {% csrf_token %}
+            <input type="text" id="chat-message" name="content" placeholder="Type a message..." required>
+            <button id="chat-message-submit" type="submit">Send</button>
+        </form>
+    </div>
+    
+
+    <script>
+        const sendMessageUrl = "{% url 'send_message' receiver.id %}";
+        const roomName = "{{ chat_room.id|default:'' }}";
+        const userName = "{{ request.user.username }}";
+    </script>
+    <script src="{% static 'js/chat/chat_room.js' %}"></script>
+</body>
+
+</html>

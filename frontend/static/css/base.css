@@ -1,83 +1,173 @@
-/* HEADER STYLE START */
-.chat-dropdown-header:hover{
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.bg-white {
+    background-color: #fff !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e1e4e8 !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Search Bar */
+.search-bar {
+    flex-grow: 1;
+    max-width: 500px;
+}
+
+.search-bar .form-control {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+}
+
+.search-bar .btn {
+    border-radius: 20px;
+    padding: 8px 20px;
+}
+
+/* Notifications */
+.notifications-icon-container {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f2f5;
+    position: relative;
     cursor: pointer;
-    background: var(--main-background-color);
+    transition: all 0.3s ease;
 }
-.chat-dropdown-header{
-    color: var(--light-primary-text-color);
-}
-.scrollable-menu {
-    height: auto;
-    max-height: 90vh;
-    width: 500px;
-    overflow-x: hidden;
+
+.notifications-icon-container:hover {
+    background-color: #e4e6e9;
 }
 
 .notifications-material-icon {
-    font-size: 28px;
+    color: #495057;
+    font-size: 20px;
+}
 
-}
-.notifications-icon-container{
-    width: 40px;
-    height: 40px;
-    background-color: var(--main-background-color);
-}
-.notifications-icon-container:hover {
-    cursor: pointer;
-    background-color: var(--secondary-text-color)
-}
-.notify-badge{
+.notify-badge {
     position: absolute;
-    background: transparent;
-    height:1.2rem;
-    width:1.2rem;
-    line-height: 1.2rem;
-    top:1rem;
-    right:2rem;
-    text-align: center;
-    font-size: 1rem;
+    top: -5px;
+    right: -5px;
+    background-color: #dc3545;
+    color: white;
     border-radius: 50%;
-    color:white;
-    font-weight: 630;
-    margin-top:-15px;
-    margin-right: -25px;
-}
-#id_notifications_spinner{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-/* HEADER STYLE END */
-
-
-/* BODY STYLE START */
-.main{
-    min-height: 100vh;
-    height: 100%;
+    padding: 2px 6px;
+    font-size: 12px;
 }
 
-head{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
-}
-footer{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
-}
-body{
-    background-color: #f2f2f2;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
+/* Account Image */
+.account-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-root{
-    --main-background-color:#f2f2f2;
-    --dark-background-color:#f2f2f2;
-    --secondary-background-color:#f2f2f2;
-    --light-primary-text-color:#f2f2f2;
+.account-image:hover {
+    transform: scale(1.05);
 }
-/* BODY STYLE END */
 
-/* FOOTER STYLE  */
-.footer{
-    min-height: 100px;
+/* Dropdown Menu */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+}
+
+/* Scrollable Menu */
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 20px 0;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #e1e4e8;
+}
+
+.footer p {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .d-flex.flex-row-reverse {
+        justify-content: center !important;
+    }
+    
+    .account-image {
+        margin-left: 10px;
+    }
+}
+
+/* Animation for notifications */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.new-notification {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* Chat specific styles (will be extended in chat.css) */
+#id_chat_notifications_container, 
+#id_general_notifications_container {
+    min-width: 300px;
+    padding: 0;
+}
+
+.notification-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
 }
