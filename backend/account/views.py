@@ -1,17 +1,24 @@
+"""
+The account app views file.
+it handles all endpoints related to user register, login, logout, update and permissions others.
+"""
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, JsonResponse
-from account.forms import RegistrationForm, LoginForm, AccountUpdateForm
 from django.conf import settings
+
+from rest_framework.views import APIView
+
+from account.forms import RegistrationForm, LoginForm, AccountUpdateForm
 from friend.friend_request_status import FriendRequestStatus
 from friend.models import FriendRequest, FriendList
+from friend.utils import get_friend_request, get_friend_request_status
 from .models import Account
 from .models import get_default_profile_image as default_image_path
 
 # Import utilities
 from .utils import fetch_account_details, handle_image_upload, search_accounts
-from friend.utils import get_friend_request, get_friend_request_status
-
 
 def registration_view(request, *args, **kwargs):
     user = request.user
@@ -28,8 +35,7 @@ def registration_view(request, *args, **kwargs):
             account = authenticate(email=email, password=raw_password)
             login(request, account)
             return redirect("home")
-        else:
-            context['registration_form'] = form
+    context['registration_form'] = form
 
     return render(request, 'account/register.html', context)
 
