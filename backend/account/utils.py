@@ -5,7 +5,6 @@ from friend.models import FriendList
 from .models import Account
 
 
-
 # Utility to fetch account details
 def fetch_account_details(request, user_id):
     """
@@ -22,14 +21,15 @@ def fetch_account_details(request, user_id):
 
     return account, friend_list
 
+
 # Utility for handling image uploads
 def handle_image_upload(account, base64_image):
     """
     Decodes and uploads a base64-encoded image for the given account.
     Deletes the old profile image if present.
     """
-    format, imgstr = base64_image.split(';base64,')  # Split metadata and image data
-    ext = format.split('/')[-1]  # Get file extension
+    format, imgstr = base64_image.split(";base64,")  # Split metadata and image data
+    ext = format.split("/")[-1]  # Get file extension
     image_data = ContentFile(base64.b64decode(imgstr), name=f"cropped_image.{ext}")
 
     # Delete the old image
@@ -39,7 +39,9 @@ def handle_image_upload(account, base64_image):
     # Save the new image
     account.profile_image.save(image_data.name, image_data)
 
+
 from account.models import Account
+
 
 def search_accounts(query):
     """
@@ -48,5 +50,7 @@ def search_accounts(query):
     if not query or len(query) > 100:
         return None, "Invalid search query. Query is either empty or too long."
 
-    search_results = Account.objects.filter(username__icontains=query, email__icontains=query).distinct()
+    search_results = Account.objects.filter(
+        username__icontains=query, email__icontains=query
+    ).distinct()
     return search_results, None
