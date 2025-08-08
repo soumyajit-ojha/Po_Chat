@@ -1,6 +1,11 @@
+"""
+Project global settings for PO CHAT.
+"""
+
+from os import path
+
 from pathlib import Path
 from decouple import config
-from os import path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -23,9 +28,10 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "account.Account"
 
 # Application definition
+# RULE: rule daphne should have to be first to avoid conflic of commanding runserver command.
 
 INSTALLED_APPS = [
-    'daphne',               # rule daphne should have to firstt to avoid conflic of commanding runserver command.
+    'daphne',   # see rules 
     'personal',
     'account',
     'friend',
@@ -138,9 +144,9 @@ STATICFILES_DIRS = [path.join(BASE_DIR, 'frontend/static')]
 STATIC_ROOT = path.join(BASE_DIR, 'static_cdn')
 
 
-# Media files Configuration 
+# Media files Configuration
 MEDIA_URL = '/media/'
-MEDIA_ROOT = path.join(BASE_DIR, 'media_cdn')
+MEDIA_ROOT = path.join(BASE_DIR, 'media')
 
 BASE_URL = "http://127.0.0.1:8000"
 MAX_PHOTO_SIZE = 10485760 # 10 * 1024 * 1025 ( 10 MB)
