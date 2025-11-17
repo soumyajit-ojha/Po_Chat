@@ -1,22 +1,37 @@
-import pymysql
+"""
+This module used to check and create database
+"""
+
+
 import traceback
 from datetime import datetime
+import pymysql
 from decouple import config
 
-vars={
-    "host":config("MYSQL_HOST"),
-    "db_name":config("MYSQL_DB"),
-    "user":config("MYSQL_USER"),
-    "password":config("MYSQL_PASS"),
-    "port":config("MYSQL_PORT"),
+VARS={
+    "host":config("DB_HOST"),
+    "db_name":config("DB_NAME"),
+    "user":config("DB_USER"),
+    "password":config("DB_PASS"),
+    "port":config("DB_PORT"),
 }
-def create_database(db_name):
+
+def create_database(db_name:str):
+    """
+    It check database exitance then create.
+    - parameters:
+        - db_name : str (name of the database)
+    - returns:
+        - message : str (message of database create or existance.)
+    - errors:
+        - message : str (error message.)
+    """
     try:
         mysql_conn = pymysql.connect(
-            host=vars["host"],
-            user=vars["user"],
-            password=vars["password"],
-            port=int(vars["port"]),
+            host=VARS["host"],
+            user=VARS["user"],
+            password=VARS["password"],
+            port=int(VARS["port"]),
         )
         cur = mysql_conn.cursor()
         cur.execute("SHOW DATABASES")
@@ -33,5 +48,5 @@ def create_database(db_name):
         print(traceback.format_exc())
 
 
-db_name = vars["db_name"]
-create_database(db_name=db_name)
+name = VARS["db_name"]
+create_database(db_name=name)
