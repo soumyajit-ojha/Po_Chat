@@ -1,22 +1,34 @@
-import pymysql
+"""
+This script creates a MuSQL database if it does not exist.
+"""
+
 import traceback
 from datetime import datetime
+import pymysql
 from decouple import config
 
-vars={
-    "host":config("MYSQL_HOST"),
-    "db_name":config("MYSQL_DB"),
-    "user":config("MYSQL_USER"),
-    "password":config("MYSQL_PASS"),
-    "port":config("MYSQL_PORT"),
+VARS = {
+    "host": config("DB_HOST"),
+    "db_name": config("DB_NAME"),
+    "user": config("DB_USER"),
+    "password": config("DB_PASS"),
+    "port": config("DB_PORT"),
 }
+print(VARS)
+
 def create_database(db_name):
+    """
+    It create a database if its not exists.
+    : param db_name: The name of the database to be created.
+    : return: None
+    """
+
     try:
         mysql_conn = pymysql.connect(
-            host=vars["host"],
-            user=vars["user"],
-            password=vars["password"],
-            port=int(vars["port"]),
+            host=VARS["host"],
+            user=VARS["user"],
+            password=VARS["password"],
+            port=int(VARS["port"]),
         )
         cur = mysql_conn.cursor()
         cur.execute("SHOW DATABASES")
@@ -33,5 +45,5 @@ def create_database(db_name):
         print(traceback.format_exc())
 
 
-db_name = vars["db_name"]
-create_database(db_name=db_name)
+db = VARS["db_name"]
+create_database(db_name=db)
