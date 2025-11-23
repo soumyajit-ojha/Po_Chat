@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from account.views import account_search_view
+# from account.views import account_search_view
 
 
 urlpatterns = [
@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include('account.urls')),
     path('', include('friend.urls')),
     path('', include('chat.urls')),
+    path("user/", include("user.urls")),
+
 
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='password_reset/password_change_done.html'), 
         name='password_change_done'),

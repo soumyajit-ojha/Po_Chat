@@ -4,6 +4,7 @@ This file contains all the configuration serrings for this Django project.
 """
 
 from os import path
+from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
@@ -27,7 +28,7 @@ if DEBUG is True:
 ALLOWED_HOSTS = []
 
 # For Custom User auth Model.
-AUTH_USER_MODEL = "account.Account"
+AUTH_USER_MODEL = "user.User"
 
 # Application definition
 
@@ -46,6 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -142,7 +146,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [path.join(BASE_DIR, "frontend/static")]
 STATIC_ROOT = path.join(BASE_DIR, "static_cdn")
 
 
@@ -157,3 +160,18 @@ MAX_PHOTO_SIZE = 10485760  # 10 * 1024 * 1025 ( 10 MB)
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# REST Framework Configurations
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
+# Simple JWT Settings
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+}
